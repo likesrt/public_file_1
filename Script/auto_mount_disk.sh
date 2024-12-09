@@ -116,8 +116,7 @@ EOF
 	done
 }
 
-
-fdiskP
+lsblk
 echo -e ""
 echo -e "Done"
 echo -e "挂载成功"
