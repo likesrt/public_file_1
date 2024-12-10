@@ -22,13 +22,10 @@ if [ -n "$mountDisk" ]; then
     exit 1
 fi
 
-
-
-
 # 数据盘自动分区并挂载
 fdiskP() {
-    # 遍历所有磁盘（除了已经挂载的）
-    for i in $(lsblk -d -o NAME | grep -E 'sd|vd'); do
+    # 遍历所有磁盘（除去已经挂载的磁盘）
+    for i in $(lsblk -d -o NAME,MOUNTPOINT | grep -E 'sd|vd' | awk '$2=="" {print $1}'); do
         echo "Processing /dev/$i"
 
         # 如果分区不存在，则创建分区
